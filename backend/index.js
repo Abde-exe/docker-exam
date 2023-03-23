@@ -26,8 +26,8 @@ app.get("/todos", async (req, res) => {
 });
 
 app.post("/todos", async (req, res) => {
-  const { task } = req.body;
-  const result = await db('todos').insert({ task });
+  const { name, description } = req.body;
+  const result = await db('todos').insert({ name, description });
   res.json(result);
 
 });
