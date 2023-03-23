@@ -20,16 +20,27 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/todos", async (req, res) => {
-  //TO_MODIFY
-  res.send([]) // to remove after question 1)
+  const todos = await db.select('*').from('todos');
+  res.json(todos);
+  //res.send([]) // to remove after question 1)
 });
 
 app.post("/todos", async (req, res) => {
-  //TO_MODIFY
+  const { task } = req.body;
+  const result = await db('todos').insert({ task });
+  res.json(result);
+
 });
 
 app.delete("/todos/:todoId", async (req, res) => {
-  //TO_MODIFY
+  const todoId = req.params.todoId;
+  try {
+    const result = await db('todos').where({ id: todoId }).delete();
+    res.send(`Todo with id ${todoId} has been deleted`);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal server error");
+  }
 });
 
 app.listen(port, () => {
