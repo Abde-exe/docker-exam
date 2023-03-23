@@ -7,6 +7,14 @@ services:
       dockerfile: Dockerfile
     ports:
       - "4001:4001"
+      
+  react:
+    container_name: my-react-app
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
 
   mysql:
     container_name: mysqldb
