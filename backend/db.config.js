@@ -3,5 +3,5 @@ module.exports = {
   USER: "root",
   PASSWORD: "password",
   DATABASE: "mydatabase",
-  PORT: "3306",
+  PORT: process.env.MYSQL_PORT,
 };
